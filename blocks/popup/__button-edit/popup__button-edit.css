@@ -1,4 +1,4 @@
-.popup__button-save {
+.popup__button-edit {
     font-family: 'Inter', Arial, Helvetica, sans-serif;
     font-style: normal;
     font-weight: 400;
@@ -15,13 +15,13 @@
     border-radius: 2px;
 }
 
-.popup__button-save:hover {
+.popup__button-edit:hover {
     opacity: 0.8;
     cursor: pointer;
 }
 
 @media screen and (max-width: 500px) {
-    .popup__button-save {
+    .popup__button-edit {
         max-width: 238px;
         margin: 45px auto 0;
         font-size: 14px;

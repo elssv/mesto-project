@@ -10,6 +10,8 @@
     box-sizing: border-box;
     padding: 34px 36px 37px;
     min-height: 322px;
+    transition: all 0.8s ease 0s;
+    transform: translate(0%, 40%);
 }
 
 @media screen and (max-width: 500px) {
