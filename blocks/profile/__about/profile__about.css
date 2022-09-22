@@ -19,3 +19,10 @@
 		line-height: 17px;
 	}
 }
+
+@media screen and (max-width: 420px) {
+	.profile__about {
+		max-width: 220px;
+		margin: 0 auto;
+	}
+}
