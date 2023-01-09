@@ -1,7 +1,5 @@
 //закрытие попапа через escape
 
-export { closePopupEscape, openPopup, closePopup };
-
 const closePopupEscape = (e) => {
   if (e.key === "Escape") {
     closePopup(document.querySelector('.popup_opened'));
@@ -25,9 +23,12 @@ function closePopup(popup) {
 const overlayPopupCloseOverlay = Array.from(document.querySelectorAll('.popup'));
 
 overlayPopupCloseOverlay.forEach((overlay) => {
-    overlay.addEventListener('click', (e) => {
+    overlay.addEventListener('mousedown', (e) => {
         if (e.target.classList.contains('popup_opened')) {
             closePopup(e.target);
         }
     });
 });
+
+
+export { closePopupEscape, openPopup, closePopup };

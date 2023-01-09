@@ -1,5 +1,3 @@
-export { showInputError, hideInputError, hasInvalidInput, toggleButtonState, setEventListeners, enableValidation };
-
 const showInputError = (form, input, errorMessage, config) => {
   const errorElement = form.querySelector(`.${input.id}-error`);
   input.classList.add(config.inputErrorClass);
@@ -55,6 +53,11 @@ const setEventListeners = (formElement, config) => {
       toggleButtonState(inputList, buttonElement, config);
     });
   });
+  formElement.addEventListener('reset', () => {
+    setTimeout(() => {
+      toggleButtonState(inputList, buttonElement, config);
+    }, 0);
+  });
 }
 
 const enableValidation = (config) => {
@@ -63,3 +66,5 @@ const enableValidation = (config) => {
     setEventListeners(formElement, config);
   });
 }
+
+export { showInputError, hideInputError, hasInvalidInput, toggleButtonState, setEventListeners, enableValidation };

@@ -1,10 +1,5 @@
-export { createCard, renderCard, openFull };
-import { openPopup } from "./utils";
-
-export const popupFullPicture = document.querySelector('.popup_full-picture');
-const imageFull = popupFullPicture.querySelector('.popup__full-image');
-const nameFull = popupFullPicture.querySelector('.popup__full-text');
-export const cardsContainer = document.querySelector('.elements');
+import { openPopup } from "./modal";
+import { popupFullPicture } from "./constants";
 
 //карточки
 
@@ -52,3 +47,8 @@ function openFull(name, link) {
   imageFull.alt = name;
   nameFull.textContent = name;
 }
+
+export { createCard, renderCard, openFull };
+export const cardsContainer = document.querySelector('.elements');
+const imageFull = popupFullPicture.querySelector('.popup__full-image');
+const nameFull = popupFullPicture.querySelector('.popup__full-text');

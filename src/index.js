@@ -1,30 +1,28 @@
 import './pages/index.css';
 
-//переменные
-
 import { cardsContainer } from "./components/cards.js";
-
-//переменные редактирования профиля
-
-const buttonEdit = document.querySelector('.profile__button-edit');
-const buttonEditClose = document.querySelector('.popup__close-edit');
-const popupEditForm = document.querySelector('.popup_edit-profile');
-const formEdit = popupEditForm.querySelector('.form__edit');
-const nameInput = document.querySelector('.popup__name');
-const jobInput = document.querySelector('.popup__job');
-const profileName = document.querySelector('.profile__name');
-const profileAbout = document.querySelector('.profile__about');
-
-//переменные добавления карточки
-
-const buttonAddClose = document.querySelector('.popup__close-add');
-const popupAddCard = document.querySelector('.popup_add-card');
-const popupAddButton = document.querySelector('.profile__button-add');
-const newCard = document.querySelector('.form__add');
-const itemName = newCard.querySelector('.popup__item-name');
-const itemPicture = newCard.querySelector('.popup__item-picture');
-
-import { closePopupEscape, openPopup, closePopup } from "./components/utils.js";
+import { closePopupEscape, openPopup, closePopup } from "./components/modal.js";
+import { createCard, renderCard, openFull } from "./components/cards.js";
+import { popupFullPicture } from "./components/constants.js";
+import { initialCards } from "./components/constants.js";
+import { showInputError, hideInputError, hasInvalidInput, toggleButtonState, setEventListeners, enableValidation } from "./components/validate.js"
+import { 
+  buttonEdit, 
+  buttonEditClose, 
+  popupEditForm, 
+  formEdit, 
+  nameInput, 
+  jobInput, 
+  profileName, 
+  profileAbout, 
+  buttonAddClose, 
+  popupAddCard, 
+  popupAddButton,
+  newCard,
+  itemName,
+  itemPicture,
+  buttonFullClose
+} from "./components/constants.js";
 
 //открытие-закрытие попапа редактирование профиля
 
@@ -60,27 +58,20 @@ buttonAddClose.addEventListener('click', function closeAddForm(e) {
 
 //добавление карточки
 
-newCard.addEventListener('submit', function addFormSubmitHandler(e) {
+function addFormSubmitHandler(e) {
   e.preventDefault();
   renderCard(itemPicture.value, itemName.value);
   newCard.reset();
   closePopup(popupAddCard);
-});
+}
 
-import { createCard, renderCard, openFull } from "./components/cards.js";
-import { popupFullPicture } from "./components/cards.js";
-
-//переменные полного изображения
-
-const buttonFullClose = popupFullPicture.querySelector('.popup__close-full');
+newCard.addEventListener('submit', addFormSubmitHandler);
 
 //попап полного изображения
 
 buttonFullClose.addEventListener('click', () => {
   closePopup(popupFullPicture);
 });
-
-import { initialCards } from "./components/initialCards.js";
 
 //дефолтные 6 карточек
 
@@ -94,8 +85,6 @@ renderInitialCards();
 
 //валидация форм
 
-import { showInputError, hideInputError, hasInvalidInput, toggleButtonState, setEventListeners, enableValidation } from "./components/validate.js"
-    
 enableValidation({
   formSelector: '.popup__form',
   inputSelector: '.popup__input',
