@@ -1,7 +1,8 @@
+import './pages/index.css';
+
 //переменные
 
-const elementTemplate = document.querySelector('#elem').content;
-const cardsContainer = document.querySelector('.elements');
+import { cardsContainer } from "./components/cards.js";
 
 //переменные редактирования профиля
 
@@ -23,22 +24,7 @@ const newCard = document.querySelector('.form__add');
 const itemName = newCard.querySelector('.popup__item-name');
 const itemPicture = newCard.querySelector('.popup__item-picture');
 
-//переменные полного изображения
-
-const popupFullPicture = document.querySelector('.popup_full-picture');
-const buttonFullClose = popupFullPicture.querySelector('.popup__close-full');
-const imageFull = popupFullPicture.querySelector('.popup__full-image');
-const nameFull = popupFullPicture.querySelector('.popup__full-text');
-
-//открытие-закрытие попапа
-
-function openPopup(popup) {
-  popup.classList.add('popup_opened');
-}
-
-function closePopup(popup) {
-  popup.classList.remove('popup_opened');
-}
+import { closePopupEscape, openPopup, closePopup } from "./components/utils.js";
 
 //открытие-закрытие попапа редактирование профиля
 
@@ -81,38 +67,20 @@ newCard.addEventListener('submit', function addFormSubmitHandler(e) {
   closePopup(popupAddCard);
 });
 
-//карточки
+import { createCard, renderCard, openFull } from "./components/cards.js";
+import { popupFullPicture } from "./components/cards.js";
 
-function createCard(link, name) {
-  const cardContainer = elementTemplate.querySelector('.element').cloneNode(true);
-  const placePicture =  cardContainer.querySelector('.element__picture');
-  const placeName = cardContainer.querySelector('.element__info-text');
-  placePicture.src = link;
-  placePicture.alt = name;
-  placeName.textContent = name;
-  const buttonLike = cardContainer.querySelector('.element__info-like');
-  const buttonTrash = cardContainer.querySelector('.element__delete');
+//переменные полного изображения
 
-  //лайк карточки
+const buttonFullClose = popupFullPicture.querySelector('.popup__close-full');
 
-  buttonLike.addEventListener('click', function likeCard(e) {
-    e.target.classList.toggle('element__info-like_active')
-  });
+//попап полного изображения
 
-  //удаление карточки
+buttonFullClose.addEventListener('click', () => {
+  closePopup(popupFullPicture);
+});
 
-  buttonTrash.addEventListener('click', function deleteCard(e) {
-    e.target.closest('.element').remove()
-  });
-
-  //картинка на полный экран
-
-  placePicture.addEventListener ('click', function openFullPicture(e) {
-    openFull (name, link)
-  });
-
-  return cardContainer;
-}
+import { initialCards } from "./components/initialCards.js";
 
 //дефолтные 6 карточек
 
@@ -122,23 +90,17 @@ function renderInitialCards() {
   });
 }
 
-//рендер
-
-function renderCard(link, name) {
-	cardsContainer.prepend(createCard(link, name))
-}
-
 renderInitialCards();
 
-//попап полного изображения
+//валидация форм
 
-function openFull(name, link) {
-  openPopup(popupFullPicture);
-  imageFull.src = link;
-  imageFull.alt = name;
-  nameFull.textContent = name;
-}
-
-buttonFullClose.addEventListener('click', () => {
-  closePopup(popupFullPicture);
-});
+import { showInputError, hideInputError, hasInvalidInput, toggleButtonState, setEventListeners, enableValidation } from "./components/validate.js"
+    
+enableValidation({
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__button',
+  inactiveButtonClass: 'popup__button_disabled',
+  inputErrorClass: 'popup__input_type_error',
+  errorClass: 'popup__error_visible'
+})
